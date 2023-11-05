@@ -5,7 +5,23 @@ export default {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    colors: {
+      white: '#fff',
+      black: '#000',
+      main: '#CF7D35',
+      sub: 'var(--sub_color)',
+      bodyText: 'var(--text_color)',
+      second: '#111124',
+    },
+    extend: {
+      fontFamily: {
+        heading: "'Josefin Sans', sans-serif",
+        body: "'Alata', sans-serif",
+      }
+    },
   },
   plugins: [require("daisyui")],
+  daisyui: {
+    themes: ["light", "dark"],
+  },
 }

@@ -10,5 +10,19 @@
 }
 
 ::selection {
-  background-color: #ffd0ab;FG
+  background-color: #ffd0ab;
+};
+
+body {
+  overflow-x: hidden;
+};
+
+:root {
+  --text_color: #3a3a3b;
+  --sub_color: #111124;
+}
+
+[data-theme="dark"] {
+  --text_color: #aeb6c5;
+  --sub_color: #977EF6;
 }
