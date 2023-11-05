@@ -12,6 +12,7 @@ export default {
       sub: 'var(--sub_color)',
       bodyText: 'var(--text_color)',
       second: '#111124',
+      headerBg: 'var(--header_bg)',
     },
     extend: {
       fontFamily: {

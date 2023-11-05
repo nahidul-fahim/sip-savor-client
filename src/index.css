@@ -20,9 +20,11 @@ body {
 :root {
   --text_color: #3a3a3b;
   --sub_color: #111124;
+  --header_bg: #fff;
 }
 
 [data-theme="dark"] {
   --text_color: #aeb6c5;
   --sub_color: #977EF6;
+  --header_bg: #1D232A;
 }
