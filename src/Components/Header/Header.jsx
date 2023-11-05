@@ -6,9 +6,9 @@ const Header = () => {
     const logo = 'https://i.ibb.co/q1fc28g/logo.png';
 
     const links = <>
-        <NavLink to="/" className="font-heading text-bodyText text-[18px] hover:text-main duration-300">Home</NavLink>
-        <NavLink to="/shop" className="font-heading text-bodyText text-[18px] hover:text-main duration-300">Shop</NavLink>
-        <NavLink to="/blog" className="font-heading text-bodyText text-[18px] hover:text-main duration-300">Blog</NavLink>
+        <NavLink to="/" className="font-body text-bodyText text-[18px] hover:text-main duration-300">Home</NavLink>
+        <NavLink to="/shop" className="font-body text-bodyText text-[18px] hover:text-main duration-300">Shop</NavLink>
+        <NavLink to="/blog" className="font-body text-bodyText text-[18px] hover:text-main duration-300">Blog</NavLink>
     </>
 
 
@@ -18,14 +18,14 @@ const Header = () => {
             <div className="bg-second p-2">
                 <div className="container mx-auto flex justify-end items-center gap-10">
                     <div className="flex justify-center items-center gap-3">
-                        <button className="border-[1px] uppercase px-3 py-1 border-white text-white font-body tracking-[3px] text-[13px] hover:bg-white hover:text-main duration-500">Login</button>
-                        <button className="border-[1px] uppercase px-3 py-1 border-white text-white font-body tracking-[3px] text-[13px] hover:bg-white hover:text-main duration-500">Sign Up</button>
+                        <button className="border-[1px] uppercase px-3 py-1 border-white text-white font-heading tracking-[3px] text-[13px] hover:bg-white hover:text-main duration-500">Login</button>
+                        <button className="border-[1px] uppercase px-3 py-1 border-white text-white font-heading tracking-[3px] text-[13px] hover:bg-white hover:text-main duration-500">Sign Up</button>
                     </div>
                 </div>
             </div>
 
             {/* Lower header part */}
-            <div className="bg-headerBg p-3">
+            <div className="bg-headerBg py-1 px-5">
                 <div className="container mx-auto flex justify-between items-center">
                     {/* Navbar */}
                     <div className="navbar w-[30%] lg:w-[35%]">
