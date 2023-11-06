@@ -47,7 +47,6 @@ const Header = () => {
             transition: Zoom,
         });
 
-
     // Failure notify
     const failedLogout = error =>
         toast.error(`${error}`, {
