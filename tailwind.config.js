@@ -18,8 +18,8 @@ export default {
     extend: {
       fontFamily: {
         heading: "'Montserrat', sans-serif",
-        body: "'Josefin Sans', sans-serif",
-        fancy: "'Dancing Script', cursive",
+        body: "'Raleway', sans-serif",
+        fancy: "'Sacramento', cursive",
       }
     },
   },
