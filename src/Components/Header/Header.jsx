@@ -11,7 +11,7 @@ const Header = () => {
 
     // website logo + loading gif
     const logo = 'https://i.ibb.co/nmVcY5P/logo.png';
-    const loadingGif = 'https://i.ibb.co/wMSm3Kn/loading-gif-bg.gif';
+    const loadingGif = 'https://i.ibb.co/wQ8yX0N/loading-animation2.gif';
 
     // Navigation links
     const links = <>
@@ -61,7 +61,7 @@ const Header = () => {
             transition: Zoom,
         });
 
-        console.log(currentUser);
+        // console.log(currentUser);
 
 
     return (
