@@ -3,6 +3,8 @@ import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
+import { ToastContainer, toast, Zoom } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 
 const PurchasePage = () => {
@@ -10,8 +12,8 @@ const PurchasePage = () => {
     // banner section background
     const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
-    // Get data 
-    const { _id, food, price, foodQuantity } = useLoaderData();
+    // Get data
+    const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderCount } = useLoaderData();
 
     // Get currently logged in user
     const { currentUser } = useAuthenticate();
@@ -24,11 +26,69 @@ const PurchasePage = () => {
     // Handle purchase function
     const handlePurchase = e => {
         e.preventDefault();
+        const orderedQuantity = parseInt(e.target.foodQuantity.value);
+        const orderedDate = startDate;
+
+        const purchaseInfo = { food, price, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderedQuantity, orderedDate, buyerEmail }
+
+        fetch('http://localhost:5000/purchasedProducts', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(purchaseInfo),
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.insertedId) {
+                    successfullPurchase()
+                }
+            })
+            .catch(error => {
+                const code = error.code;
+                if (code) {
+                    failedPurchase(code)
+                }
+            })
     }
+
+
+
+    // success notify
+    const successfullPurchase = () =>
+        toast.success('Account created successfully', {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });
+
+
+    // Failure notify
+    const failedPurchase = error =>
+        toast.error(`${error}`, {
+            position: "top-right",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: false,
+            pauseOnHover: false,
+            draggable: false,
+            progress: undefined,
+            theme: "light",
+            transition: Zoom,
+        });
+
+
 
 
     return (
         <div>
+            <ToastContainer />
             {/* Banner section */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
                 style={{
