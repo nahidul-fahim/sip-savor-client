@@ -1,8 +1,9 @@
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 const SingleProduct = ({ singleProduct }) => {
 
-    const { food, foodImage, foodCategory, price, foodQuantity } = singleProduct;
+    const { _id, food, foodImage, foodCategory, price, foodQuantity } = singleProduct;
 
     return (
 
@@ -17,7 +18,7 @@ const SingleProduct = ({ singleProduct }) => {
                 <p className='font-body font-medium text-[gray]'>{foodQuantity} in stock</p>
                 <div id='innerDiv' className="flex justify-between items-center w-full">
                     <p className='font-bold font-heading text-[18px] tracking-[1px] text-main'>${price}</p>
-                    <button className='bg-second text-[14px] uppercase font-medium px-3 py-1 text-white font-heading tracking-[1px] hover:bg-main duration-500'>Details</button>
+                    <Link to={`${_id}`}><button className='bg-second text-[14px] uppercase font-medium px-3 py-1 text-white font-heading tracking-[1px] hover:bg-main duration-500'>Details</button></Link>
                 </div>
             </div>
         </div>

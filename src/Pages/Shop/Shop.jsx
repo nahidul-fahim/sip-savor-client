@@ -9,6 +9,7 @@ const Shop = () => {
     const loadingGif = 'https://i.ibb.co/wQ8yX0N/loading-animation2.gif';
     const pageBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
+    // Declaring states for different functions
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
 

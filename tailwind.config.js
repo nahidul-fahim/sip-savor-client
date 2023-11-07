@@ -18,7 +18,8 @@ export default {
     extend: {
       fontFamily: {
         heading: "'Montserrat', sans-serif",
-        body: "'Raleway', sans-serif",
+        // body: "'Raleway', sans-serif",
+        body: "'Montserrat', sans-serif",
         fancy: "'Sacramento', cursive",
       }
     },
