@@ -7,6 +7,7 @@ import Login from '../../Auth/Login/Login';
 import Shop from '../../Pages/Shop/Shop';
 import SingleProductDetails from '../../Pages/SingleProductDetails/SingleProductDetails';
 import PurchasePage from '../../Pages/PurchasePage/PurchasePage';
+import Blog from '../../Pages/Blog/Blog';
 
 const router = createBrowserRouter([
   {
@@ -39,7 +40,11 @@ const router = createBrowserRouter([
         path: "/purchase/:id",
         element: <PurchasePage />,
         loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
-      }
+      },
+      {
+        path: "/blog",
+        element: <Blog />,
+      },
     ]
   },
 ]);
