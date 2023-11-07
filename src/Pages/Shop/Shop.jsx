@@ -6,7 +6,7 @@ import SingleProduct from "./SingleProduct";
 const Shop = () => {
 
     // Necessary images
-    const loadingGif = 'https://i.ibb.co/wQ8yX0N/loading-animation2.gif';
+    const loadingGif = 'https://i.ibb.co/HrZVdVr/loading-animation.gif';
     const pageBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
     // Declaring states for different functions
@@ -26,7 +26,7 @@ const Shop = () => {
 
 
     if (loading) {
-        return <div className="container mx-auto flex justify-center items-center h-[100vh]"><img src={loadingGif} className="w-[80px] h-[80px]" /></div>
+        return <div className="container mx-auto flex justify-center items-center h-[100vh]"><img src={loadingGif} className="w-[90px] h-[90px]" /></div>
     }
 
     // console.log(allProducts);

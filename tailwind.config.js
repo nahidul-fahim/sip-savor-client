@@ -8,12 +8,12 @@ export default {
     colors: {
       white: '#fff',
       black: '#000',
-      main: '#CE7954',
+      main: '#9F4B4B',
       sub: 'var(--sub_color)',
       bodyText: 'var(--text_color)',
       second: '#111124',
       headerBg: 'var(--header_bg)',
-      lightMain: '#ffbf75',
+      lightMain: '#CF9982',
     },
     extend: {
       fontFamily: {
