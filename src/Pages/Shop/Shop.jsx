@@ -5,7 +5,9 @@ import SingleProduct from "./SingleProduct";
 
 const Shop = () => {
 
+    // Necessary images
     const loadingGif = 'https://i.ibb.co/wQ8yX0N/loading-animation2.gif';
+    const pageBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -20,7 +22,7 @@ const Shop = () => {
             })
     }, [])
 
-    
+
 
     if (loading) {
         return <div className="container mx-auto flex justify-center items-center h-[100vh]"><img src={loadingGif} className="w-[80px] h-[80px]" /></div>
@@ -30,12 +32,22 @@ const Shop = () => {
 
     return (
         <div>
-            <h2 className="text-5xl font-heading text-main font-extrabold">Shop page</h2>
-            {
-                allProducts.map(singleProduct => <SingleProduct
-                key={singleProduct._id}
-                singleProduct={singleProduct}></SingleProduct>)
-            }
+            {/* Banner Part */}
+            <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
+                style={{
+                    backgroundImage: `linear-gradient(to bottom, #00000050, #00000050), url(${pageBg})`
+                }}>
+                <h2 className="text-7xl md:text-9xl font-bold text-center text-white uppercase tracking-[10px]">Shop</h2>
+            </div>
+
+            {/* Getting all products section */}
+            <div className="container mx-auto p-5 mt-[100px] grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-around content-around">
+                {
+                    allProducts.map(singleProduct => <SingleProduct
+                        key={singleProduct._id}
+                        singleProduct={singleProduct}></SingleProduct>)
+                }
+            </div>
         </div>
     );
 };
