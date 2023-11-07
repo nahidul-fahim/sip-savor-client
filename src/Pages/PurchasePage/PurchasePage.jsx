@@ -15,6 +15,7 @@ const PurchasePage = () => {
     // Get data
     const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderCount } = useLoaderData();
 
+
     // Get currently logged in user
     const { currentUser } = useAuthenticate();
     const buyer = currentUser?.displayName;
@@ -29,8 +30,18 @@ const PurchasePage = () => {
         const orderedQuantity = parseInt(e.target.foodQuantity.value);
         const orderedDate = startDate;
 
+        // Data to sent to the database
         const purchaseInfo = { food, price, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderedQuantity, orderedDate, buyerEmail }
 
+
+        // Calculate ordercount and remaining foodQuantity after a successfull purchase
+        const totalOrder = orderCount + 1;
+        const reaminingQuantity = foodQuantity - orderedQuantity;
+
+        // Data to send to database in order to update existing product info
+        const updatedProductInfo = { totalOrder, reaminingQuantity };
+
+        // sending purchased data to database
         fetch('http://localhost:5000/purchasedProducts', {
             method: 'POST',
             headers: {
@@ -47,8 +58,25 @@ const PurchasePage = () => {
             .catch(error => {
                 const code = error.code;
                 if (code) {
-                    failedPurchase(code)
+                    return failedPurchase(code);
                 }
+            })
+
+
+        // sending updated data of the products to database
+        fetch(`http://localhost:5000/allfoods/${_id}`, {
+            method: 'PUT',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(updatedProductInfo),
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data)
+            })
+            .catch(error => {
+                console.log(error)
             })
     }
 
@@ -56,7 +84,7 @@ const PurchasePage = () => {
 
     // success notify
     const successfullPurchase = () =>
-        toast.success('Account created successfully', {
+        toast.success('Purchase Successful!', {
             position: "top-right",
             autoClose: 2000,
             hideProgressBar: true,
