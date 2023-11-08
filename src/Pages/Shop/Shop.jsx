@@ -32,7 +32,7 @@ const Shop = () => {
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get(`https://sip-savor-server-side.vercel.app/allfoods?page=${currentPage}&size=${productPerPage}`)
+        axios.get(`https://sip-savor-server-side.vercel.app/foodsoncollection?page=${currentPage}&size=${productPerPage}`)
             .then(res => {
                 const data = res.data;
                 setAllProducts(data);
