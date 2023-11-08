@@ -69,6 +69,17 @@ const Login = () => {
                 const user = userInfo.user;
                 if (user) {
                     successLogin();
+                    const email = user.email;
+                    const userEmail = { email };
+
+                    // Get access tokem
+                    axios.post("http://localhost:5000/jwt", userEmail, { withCredentials: true })
+                        .then(res => {
+                            if (res.data.success) {
+                                navigate(location?.state ? location?.state : "/")
+                            }
+                        })
+
                 }
             })
             .catch(error => {
