@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Helmet} from "react-helmet";
 
 
 const PurchasePage = () => {
@@ -116,6 +117,10 @@ const PurchasePage = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Purchase Page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             <ToastContainer />
             {/* Banner section */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
@@ -128,10 +133,10 @@ const PurchasePage = () => {
             {/* Form section */}
             {
                 (addedBy === buyerEmail) ?
-                <div className="flex justify-center items-center p-5 h-[200px]">
-                    <h2 className="text-xl text-center font-bold font-heading text-[gray] uppercase">Sorry! You cannot buy your own product.</h2>
-                </div>
-                :
+                    <div className="flex justify-center items-center p-5 h-[200px]">
+                        <h2 className="text-xl text-center font-bold font-heading text-[gray] uppercase">Sorry! You cannot buy your own product.</h2>
+                    </div>
+                    :
                     <div className="container mx-auto mt-[100px] w-full flex flex-col justify-center items-center">
                         <form onSubmit={handlePurchase} className="w-full lg:w-2/3 px-5 lg:px-0 flex flex-col justify-center items-center gap-10">
 

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import axios from "axios";
 import SingleAdditions from "./SingleAdditions";
+import { Helmet } from "react-helmet";
 
 
 const MyAddition = () => {
@@ -22,7 +23,7 @@ const MyAddition = () => {
 
     // fetching data by email
     useEffect(() => {
-        axios.get(`http://localhost:5000/userFoods/${userEmail}`)
+        axios.get(`http://localhost:5000/userFoods/${userEmail}`, { withCredentials: true })
             .then(res => {
                 const data = res.data;
                 setUserProducts(data);
@@ -30,7 +31,7 @@ const MyAddition = () => {
             })
 
     }, [userEmail])
-    
+
 
 
     if (loading) {
@@ -42,6 +43,10 @@ const MyAddition = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Addition Page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner section */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
                 style={{
@@ -56,7 +61,7 @@ const MyAddition = () => {
                     userProducts.map(product => <SingleAdditions
                         key={product._id}
                         product={product}
-                        ></SingleAdditions>)
+                    ></SingleAdditions>)
                 }
             </div>
 

@@ -1,6 +1,7 @@
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
+import { Helmet } from "react-helmet";
 
 
 const AddNewProduct = () => {
@@ -86,6 +87,10 @@ const AddNewProduct = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Add New Product Page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             <ToastContainer />
             {/* Banner section */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"

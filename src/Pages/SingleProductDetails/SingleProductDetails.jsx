@@ -1,5 +1,5 @@
 import { Link, useLoaderData } from "react-router-dom";
-
+import { Helmet } from "react-helmet";
 
 
 const SingleProductDetails = () => {
@@ -10,6 +10,10 @@ const SingleProductDetails = () => {
 
     return (
         <div className="p-5 md:p-10 container mx-auto justify-center items-center gap-5 mt-8 md:mt-10 lg:mt-12">
+            <Helmet>
+                <title>Product Detail page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             <div className="flex flex-col md:flex-row justify-center items-center gap-10">
 
                 {/* Food image */}

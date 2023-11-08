@@ -7,19 +7,19 @@ const Footer = () => {
 
 
     return (
-        <div className="bg-second">
+        <div className="bg-second mt-[80px]">
             <footer className="container mx-auto footer p-10 bg-second text-neutral-content">
                 <aside>
-                    <img src={logo} alt="" />
+                    <Link to={"/"}><img src={logo} alt="" /></Link>
                     <p className="font-heading">Sip & Savor Restaurant <br />9800 S Cicero Ave, Oak Lawn, Indiana</p>
                     <p className="font-heading"><small>&copy; All rights reserved.</small></p>
                 </aside>
                 <nav>
                     <header className="footer-title">Social</header>
                     <div className="grid grid-flow-col gap-4">
-                        <Link> <FaFacebookSquare className="text-3xl"/></Link>
-                        <Link> <FaTwitterSquare className="text-3xl"/></Link>
-                        <Link> <FaInstagramSquare className="text-3xl"/></Link>
+                        <Link> <FaFacebookSquare className="text-3xl" /></Link>
+                        <Link> <FaTwitterSquare className="text-3xl" /></Link>
+                        <Link> <FaInstagramSquare className="text-3xl" /></Link>
                     </div>
                 </nav>
             </footer>

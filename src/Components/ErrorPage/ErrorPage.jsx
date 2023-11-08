@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 
 const ErrorPage = () => {
@@ -7,6 +8,10 @@ const ErrorPage = () => {
 
     return (
         <div className="flex justify-center items-center h-[100vh] flex-col gap-4">
+            <Helmet>
+                <title>404 page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             <h2 className="text-6xl font-extrabold font-heading uppercase text-center text-[gray]">Oops!</h2>
             <img src={img404} alt="" />
             <h2 className="text-4xl font-extrabold font-heading uppercase text-center text-[gray]">page not found!</h2>

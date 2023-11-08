@@ -1,4 +1,4 @@
-
+import { Helmet } from "react-helmet";
 
 const Blog = () => {
 
@@ -8,7 +8,10 @@ const Blog = () => {
 
     return (
         <div>
-
+            <Helmet>
+                <title>Blog page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner Part */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
                 style={{

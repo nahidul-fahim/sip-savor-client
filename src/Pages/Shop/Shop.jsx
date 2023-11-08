@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import SingleProduct from "./SingleProduct";
 import { FaSistrix } from "react-icons/fa";
+import { Helmet } from "react-helmet";
 
 
 const Shop = () => {
@@ -50,6 +51,10 @@ const Shop = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Shop page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner Part */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
                 style={{

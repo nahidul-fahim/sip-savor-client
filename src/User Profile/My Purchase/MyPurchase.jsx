@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import axios from "axios";
-import SinglePurchase from "./SinglePurchase";
+import SinglePurchase from "./SinglePurchase"; import { Helmet } from "react-helmet";
 
 
 const MyPurchase = () => {
@@ -21,7 +21,7 @@ const MyPurchase = () => {
 
     // fetching data by email
     useEffect(() => {
-        axios.get(`http://localhost:5000/purchased/${userEmail}`)
+        axios.get(`http://localhost:5000/purchased/${userEmail}`, {withCredentials: true})
             .then(res => {
                 const data = res.data;
                 setPurchasedProducts(data);
@@ -64,6 +64,10 @@ const MyPurchase = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>My Cart page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner section */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5 bg-cover"
                 style={{

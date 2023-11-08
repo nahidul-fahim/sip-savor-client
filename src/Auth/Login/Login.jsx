@@ -5,6 +5,8 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
+import { Helmet } from "react-helmet";
+import axios from "axios";
 
 const Login = () => {
 
@@ -30,7 +32,6 @@ const Login = () => {
         const form = e.target;
         const email = form.email.value;
         const password = form.password.value;
-        const userDetails = { email, password };
 
         const logInForm = document.getElementById('logInForm');
 
@@ -40,7 +41,15 @@ const Login = () => {
                 if (user) {
                     successLogin();
                     logInForm.reset();
-                    navigate(location?.state ? location?.state : "/")
+                    const userEmail = { email };
+
+                    // Get access tokem
+                    axios.post("http://localhost:5000/jwt", userEmail, { withCredentials: true })
+                        .then(res => {
+                            if (res.data.success) {
+                                navigate(location?.state ? location?.state : "/")
+                            }
+                        })
                 }
 
             })
@@ -56,18 +65,18 @@ const Login = () => {
     // Login user with Google
     const handleGoogleLogin = () => {
         googleSignIn()
-        .then(userInfo => {
-            const user = userInfo.user;
-            if(user) {
-                successLogin();
-            }
-        })
-        .catch(error => {
-            const code = error.code;
-            if (code) {
-                failedLogin(code);
-            }
-        })
+            .then(userInfo => {
+                const user = userInfo.user;
+                if (user) {
+                    successLogin();
+                }
+            })
+            .catch(error => {
+                const code = error.code;
+                if (code) {
+                    failedLogin(code);
+                }
+            })
     }
 
 
@@ -104,6 +113,11 @@ const Login = () => {
 
     return (
         <div>
+
+            <Helmet>
+                <title>Login page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner part */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5"
                 style={{

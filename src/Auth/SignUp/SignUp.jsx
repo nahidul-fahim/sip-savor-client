@@ -4,6 +4,7 @@ import { BsFillEyeFill, BsEyeSlashFill } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Helmet } from "react-helmet";
 
 const SignUp = () => {
 
@@ -88,6 +89,10 @@ const SignUp = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>Sign up page</title>
+                <meta name="description" content="Nested component" />
+            </Helmet>
             {/* Banner part */}
             <div className="h-[500px] flex flex-col justify-center items-center gap-5"
                 style={{
