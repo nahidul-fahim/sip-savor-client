@@ -33,7 +33,7 @@ const UpdateProduct = () => {
         // console.log(price);
 
         // sending updated data to database
-        fetch(`http://localhost:5000/updateFood/${_id}`, {
+        fetch(`https://sip-savor-server-side.vercel.app/updateFood/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

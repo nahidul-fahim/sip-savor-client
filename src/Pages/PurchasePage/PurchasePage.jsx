@@ -43,7 +43,7 @@ const PurchasePage = () => {
         const updatedProductInfo = { totalOrder, reaminingQuantity };
 
         // sending purchased data to database
-        fetch('http://localhost:5000/purchasedProducts', {
+        fetch('https://sip-savor-server-side.vercel.app/purchasedProducts', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -65,7 +65,7 @@ const PurchasePage = () => {
 
 
         // sending updated data to calculate quantity and total order
-        fetch(`http://localhost:5000/allfoods/${_id}`, {
+        fetch(`https://sip-savor-server-side.vercel.app/allfoods/${_id}`, {
             method: 'PUT',
             headers: {
                 'content-type': 'application/json'

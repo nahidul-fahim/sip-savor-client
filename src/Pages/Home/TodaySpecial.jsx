@@ -17,7 +17,7 @@ const TodaySpecial = () => {
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get("http://localhost:5000/allfoods")
+        axios.get("https://sip-savor-server-side.vercel.app/allfoods")
             .then(res => {
                 const data = res.data;
                 const sortedProducts = data.sort((a, b) => {

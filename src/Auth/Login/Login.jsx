@@ -44,7 +44,7 @@ const Login = () => {
                     const userEmail = { email };
 
                     // Get access tokem
-                    axios.post("http://localhost:5000/jwt", userEmail, { withCredentials: true })
+                    axios.post("https://sip-savor-server-side.vercel.app/jwt", userEmail, { withCredentials: true })
                         .then(res => {
                             if (res.data.success) {
                                 navigate(location?.state ? location?.state : "/")
@@ -73,7 +73,7 @@ const Login = () => {
                     const userEmail = { email };
 
                     // Get access tokem
-                    axios.post("http://localhost:5000/jwt", userEmail, { withCredentials: true })
+                    axios.post("https://sip-savor-server-side.vercel.app/jwt", userEmail, { withCredentials: true })
                         .then(res => {
                             if (res.data.success) {
                                 navigate(location?.state ? location?.state : "/")
