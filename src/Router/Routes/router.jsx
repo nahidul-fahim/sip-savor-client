@@ -9,6 +9,9 @@ import SingleProductDetails from '../../Pages/SingleProductDetails/SingleProduct
 import PurchasePage from '../../Pages/PurchasePage/PurchasePage';
 import Blog from '../../Pages/Blog/Blog';
 import MyAddition from '../../User Profile/My Addition/MyAddition';
+import UpdateProduct from '../../User Profile/My Addition/UpdateProduct';
+import AddNewProduct from '../../User Profile/AddNewProduct/AddNewProduct';
+import MyPurchase from '../../User Profile/My Purchase/MyPurchase';
 
 const router = createBrowserRouter([
   {
@@ -49,6 +52,19 @@ const router = createBrowserRouter([
       {
         path: "/myaddition",
         element: <MyAddition />
+      },
+      {
+        path: "/updateproduct/:id",
+        element: <UpdateProduct />,
+        loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
+      },
+      {
+        path: "/addnewproduct",
+        element: <AddNewProduct />
+      },
+      {
+        path: "/mypurchase",
+        element: <MyPurchase />
       }
     ]
   },

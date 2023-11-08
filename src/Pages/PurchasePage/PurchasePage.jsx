@@ -63,7 +63,7 @@ const PurchasePage = () => {
             })
 
 
-        // sending updated data of the products to database
+        // sending updated data to calculate quantity and total order
         fetch(`http://localhost:5000/allfoods/${_id}`, {
             method: 'PUT',
             headers: {
@@ -72,11 +72,11 @@ const PurchasePage = () => {
             body: JSON.stringify(updatedProductInfo),
         })
             .then(res => res.json())
-            .then(data => {
-                console.log(data)
+            .then(() => {
+                // console.log(data)
             })
-            .catch(error => {
-                console.log(error)
+            .catch(() => {
+                // console.log(error)
             })
     }
 
