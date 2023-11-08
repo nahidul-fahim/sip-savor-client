@@ -43,7 +43,7 @@ const Shop = () => {
 
     // Handle search button function
     const handleSearch = () => {
-        const filteredProducts = allProducts.filter(filtered => filtered.food.toLowerCase() === searchInput);
+        const filteredProducts = allProducts.filter(filtered => filtered.food.trim().toLowerCase().includes(searchInput));
         setAllProducts(filteredProducts);
     }
 

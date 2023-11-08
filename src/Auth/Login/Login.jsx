@@ -1,7 +1,7 @@
 import { useState } from "react";
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import { BsFillEyeFill, BsEyeSlashFill } from "react-icons/bs";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
@@ -10,6 +10,9 @@ const Login = () => {
 
     // Getting info from useAuthenticate custom hook
     const { logInUser, googleSignIn } = useAuthenticate();
+
+    const location = useLocation();
+    const navigate = useNavigate();
 
     const restaurantBg = 'https://i.ibb.co/bRz6SG2/restaurant-bg.png';
     const [showPassword, setShowPassword] = useState(false);
@@ -22,7 +25,7 @@ const Login = () => {
 
 
     // Getting value from the login form to login the user
-    const handleSignUp = e => {
+    const handleLogIn = e => {
         e.preventDefault();
         const form = e.target;
         const email = form.email.value;
@@ -37,6 +40,7 @@ const Login = () => {
                 if (user) {
                     successLogin();
                     logInForm.reset();
+                    navigate(location?.state ? location?.state : "/")
                 }
 
             })
@@ -110,7 +114,7 @@ const Login = () => {
 
             {/* Form part */}
             <div className="container mx-auto mt-[100px] mb-[100px] flex flex-col justify-center items-center gap-12 w-full px-5 lg:px-0">
-                <form onSubmit={handleSignUp} id="logInForm" className="w-full lg:w-1/3 font-body space-y-8">
+                <form onSubmit={handleLogIn} id="logInForm" className="w-full lg:w-1/3 font-body space-y-8">
                     <input required type="email" name="email" id="email" placeholder="Your Email" className="focus:outline-none px-5 py-3 border-[1px] border-[lightgray] focus:border-lightMain text-bodyText w-full font-medium tracking-[2px]" />
                     <div className="relative flex flex-col justify-center items-center">
                         <input required type={!showPassword ? "password" : "text"} name="password" id="password" placeholder="Your Password" className="focus:outline-none px-5 py-3 border-[1px] border-[lightgray] focus:border-lightMain text-bodyText w-full font-medium tracking-[2px]" />

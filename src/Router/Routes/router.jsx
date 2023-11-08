@@ -12,6 +12,7 @@ import MyAddition from '../../User Profile/My Addition/MyAddition';
 import UpdateProduct from '../../User Profile/My Addition/UpdateProduct';
 import AddNewProduct from '../../User Profile/AddNewProduct/AddNewProduct';
 import MyPurchase from '../../User Profile/My Purchase/MyPurchase';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 const router = createBrowserRouter([
   {
@@ -42,7 +43,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/purchase/:id",
-        element: <PurchasePage />,
+        element: <PrivateRoute><PurchasePage /></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
       },
       {
@@ -51,20 +52,20 @@ const router = createBrowserRouter([
       },
       {
         path: "/myaddition",
-        element: <MyAddition />
+        element: <PrivateRoute><MyAddition /></PrivateRoute>
       },
       {
         path: "/updateproduct/:id",
-        element: <UpdateProduct />,
+        element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
         loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
       },
       {
         path: "/addnewproduct",
-        element: <AddNewProduct />
+        element: <PrivateRoute><AddNewProduct /></PrivateRoute>
       },
       {
         path: "/mypurchase",
-        element: <MyPurchase />
+        element: <PrivateRoute><MyPurchase /></PrivateRoute>
       }
     ]
   },
