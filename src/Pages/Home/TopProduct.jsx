@@ -8,7 +8,6 @@ const TopProduct = () => {
 
     // Necessary images
     const loadingGif = 'https://i.ibb.co/HrZVdVr/loading-animation.gif';
-    const parrlaxBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
     // Declaring states for different functions
     const [loading, setLoading] = useState(true);
@@ -37,16 +36,9 @@ const TopProduct = () => {
 
 
     return (
-        <div className=""
-            style={{
-                backgroundAttachment: "fixed",
-                backgroundRepeat: "no-repeat",
-                backgroundSize: "cover",
-                backgroundImage: `linear-gradient(to bottom, #00000070, #00000070), url(${parrlaxBg})`
-            }}>
-            <div className="container mx-auto p-5 py-[100px] border-2 flex flex-col justify-center items-center">
-                <h3 className="text-9xl font-fancy text-lightMain">{'Today\'s'}</h3>
-                <h2 className="mt-[-40px] text-5xl tracking-[1px] font-extrabold uppercase font-heading text-white">Special</h2>
+            <div className="container mx-auto p-5 py-[100px] flex flex-col justify-center items-center">
+                <h3 className="text-8xl md:text-9xl font-fancy text-main">Favourite</h3>
+                <h2 className="mt-[-40px] text-5xl tracking-[1px] font-extrabold uppercase font-heading text-second">Menus</h2>
 
                 {/* mapping data to show the cards */}
                 <div className="w-[90%] lg:w-full mt-[90px] grid grid-cols-1 lg:grid-cols-2 gap-10">
@@ -56,9 +48,9 @@ const TopProduct = () => {
                         product={product}></TopSellCard>)
                     }
                 </div>
-                <Link to="/shop"><button className='bg-white text-main px-5 mt-10 py-2 font-semibold hover:bg-main hover:text-white duration-500 uppercase tracking-[2px]'>All Products</button></Link>
+                <Link to="/shop"><button className='bg-main text-white px-5 mt-10 py-2 font-semibold hover:bg-second hover:text-white duration-500 uppercase tracking-[2px]'>All Products</button></Link>
             </div>
-        </div>
+
     );
 };
 

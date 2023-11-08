@@ -1,5 +1,6 @@
 import FirstBanner from "./FirstBanner";
 import OutStory from "./OutStory";
+import TodaySpecial from "./TodaySpecial";
 import TopProduct from "./TopProduct";
 
 
@@ -11,6 +12,7 @@ const Home = () => {
         <div>
             <FirstBanner />
             <OutStory />
+            <TodaySpecial />
             <TopProduct />
 
         </div>
