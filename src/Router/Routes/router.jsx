@@ -8,6 +8,7 @@ import Shop from '../../Pages/Shop/Shop';
 import SingleProductDetails from '../../Pages/SingleProductDetails/SingleProductDetails';
 import PurchasePage from '../../Pages/PurchasePage/PurchasePage';
 import Blog from '../../Pages/Blog/Blog';
+import MyAddition from '../../User Profile/My Addition/MyAddition';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
         path: "/blog",
         element: <Blog />,
       },
+      {
+        path: "/myaddition",
+        element: <MyAddition />
+      }
     ]
   },
 ]);

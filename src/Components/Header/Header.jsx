@@ -241,14 +241,19 @@ const Header = () => {
                         </div>
 
                         {/* My profile links for all devices */}
-                        <div className="dropdown dropdown-end">
-                            <label tabIndex={0}>
-                                <p className="flex justify-center items-center gap-2 font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px] cursor-pointer">My Account <FaUser /> </p>
-                            </label>
-                            <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-50 p-4 shadow w-52 bg-white space-y-3">
-                                {myProfileLinks}
-                            </ul>
-                        </div>
+                        {
+                            currentUser ?
+                                <div className="dropdown dropdown-end">
+                                    <label tabIndex={0}>
+                                        <p className="flex justify-center items-center gap-2 font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px] cursor-pointer">My Profile <FaUser /> </p>
+                                    </label>
+                                    <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-50 p-4 shadow w-52 bg-white space-y-3">
+                                        {myProfileLinks}
+                                    </ul>
+                                </div>
+                                :
+                                ""
+                        }
 
                     </div>
 

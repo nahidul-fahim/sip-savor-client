@@ -28,8 +28,7 @@ const Shop = () => {
     if (loading) {
         return <div className="container mx-auto flex justify-center items-center h-[100vh]"><img src={loadingGif} className="w-[90px] h-[90px]" /></div>
     }
-
-    // console.log(allProducts);
+    
 
     return (
         <div>

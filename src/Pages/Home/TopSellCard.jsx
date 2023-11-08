@@ -1,6 +1,5 @@
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-// import '../../Styles/homePageCards.css'
 
 const TopSellCard = ({ product }) => {
 
