@@ -13,7 +13,7 @@ const PurchasePage = () => {
     const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
     // Get data
-    const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderCount } = useLoaderData();
+    const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderCount, addedBy } = useLoaderData();
 
 
     // Get currently logged in user
@@ -126,82 +126,91 @@ const PurchasePage = () => {
             </div>
 
             {/* Form section */}
-            <div className="container mx-auto mt-[100px] w-full flex flex-col justify-center items-center">
-                <form onSubmit={handlePurchase} className="w-full lg:w-2/3 px-5 lg:px-0 flex flex-col justify-center items-center gap-10">
+            {
+                (addedBy === buyerEmail) ?
+                <div className="flex justify-center items-center p-5 h-[200px]">
+                    <h2 className="text-xl text-center font-bold font-heading text-[gray] uppercase">Sorry! You cannot buy your own product.</h2>
+                </div>
+                :
+                    <div className="container mx-auto mt-[100px] w-full flex flex-col justify-center items-center">
+                        <form onSubmit={handlePurchase} className="w-full lg:w-2/3 px-5 lg:px-0 flex flex-col justify-center items-center gap-10">
 
-                    {/* Food name + quantity */}
-                    <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
-                        <div className="w-full md:w-[50%] space-y-2">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Food name</span>
-                            </label>
-                            <input type="text" name="food" id="food" value={food} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
-                        </div>
+                            {/* Food name + quantity */}
+                            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
+                                <div className="w-full md:w-[50%] space-y-2">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Food name</span>
+                                    </label>
+                                    <input type="text" name="food" id="food" value={food} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                </div>
 
-                        <div className="w-full md:w-[50%] space-y-2">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Quantity</span>
-                            </label>
+                                <div className="w-full md:w-[50%] space-y-2">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Quantity</span>
+                                    </label>
+                                    {
+                                        (foodQuantity === 0) ? <p className="font-heading text-[14px] text-[#bd2626] font-medium tracking-[1px]">Oops! Currently out of stock.</p>
+                                            :
+                                            <input required type="number" name="foodQuantity" id="foodQuantity" placeholder="Enter quantity" min="1" max={foodQuantity} className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                    }
+                                </div>
+                            </div>
+
+
+                            {/* Food price + date */}
+                            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
+                                <div className="w-full md:w-[50%] space-y-2">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Food price</span>
+                                    </label>
+                                    <input type="text" name="price" id="price" value={`$${price}`} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                </div>
+
+                                <div className="w-full md:w-[50%] space-y-2 flex flex-col">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Pick a date</span>
+                                    </label>
+                                    <DatePicker
+                                        showIcon
+                                        minDate={startDate}
+                                        selected={startDate}
+                                        onChange={(date) => setStartDate(date)}
+                                        showTimeSelect
+                                        timeFormat="HH:mm"
+                                        timeIntervals={10}
+                                        timeCaption="time"
+                                        dateFormat="MMMM d, yyyy h:mm aa" className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                </div>
+                            </div>
+
+                            {/* Buyer name + email */}
+                            <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
+                                <div className="w-full md:w-[50%] space-y-2">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Buyer name</span>
+                                    </label>
+                                    <input type="text" name="buyer" id="buyer" value={buyer} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                </div>
+
+                                <div className="w-full md:w-[50%] space-y-2">
+                                    <label>
+                                        <span className="font-heading text-[sub] font-medium tracking-[1px]">Buyer email</span>
+                                    </label>
+                                    <input type="email" name="buyerEmail" id="buyer" value={buyerEmail}
+                                        readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                </div>
+                            </div>
                             {
-                                (foodQuantity === 0) ? <p className="font-heading text-[14px] text-[#bd2626] font-medium tracking-[1px]">Oops! Currently out of stock.</p>
+                                (foodQuantity === 0) ?
+                                    <input type="submit" value="MAKE YOUR PURCHASE" disabled className="font-heading font-medium uppercase tracking-[2px] bg-main hover:bg-second text-white px-5 py-2 w-full duration-500 disabled:bg-[#b6a1a1]" />
                                     :
-                                    <input required type="number" name="foodQuantity" id="foodQuantity" placeholder="Enter quantity" min="1" max={foodQuantity} className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
+                                    <input type="submit" value="MAKE YOUR PURCHASE" className="font-heading font-medium uppercase tracking-[2px] bg-main hover:bg-second text-white px-5 py-2 w-full duration-500" />
                             }
-                        </div>
+                        </form>
                     </div>
+            }
 
 
-                    {/* Food price + date */}
-                    <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
-                        <div className="w-full md:w-[50%] space-y-2">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Food price</span>
-                            </label>
-                            <input type="text" name="price" id="price" value={`$${price}`} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
-                        </div>
-
-                        <div className="w-full md:w-[50%] space-y-2 flex flex-col">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Pick a date</span>
-                            </label>
-                            <DatePicker
-                                showIcon
-                                minDate={startDate}
-                                selected={startDate}
-                                onChange={(date) => setStartDate(date)}
-                                showTimeSelect
-                                timeFormat="HH:mm"
-                                timeIntervals={10}
-                                timeCaption="time"
-                                dateFormat="MMMM d, yyyy h:mm aa" className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
-                        </div>
-                    </div>
-
-                    {/* Buyer name + email */}
-                    <div className="w-full flex flex-col md:flex-row justify-between items-center gap-10">
-                        <div className="w-full md:w-[50%] space-y-2">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Buyer name</span>
-                            </label>
-                            <input type="text" name="buyer" id="buyer" value={buyer} readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
-                        </div>
-
-                        <div className="w-full md:w-[50%] space-y-2">
-                            <label>
-                                <span className="font-heading text-[sub] font-medium tracking-[1px]">Buyer email</span>
-                            </label>
-                            <input type="email" name="buyerEmail" id="buyer" value={buyerEmail}
-                                readOnly className="focus:outline-none border-[1px] border-[lightgray] w-full px-5 py-2 font-heading tracking-[1px] text-[gray] font-medium focus:border-main" />
-                        </div>
-                    </div>
-                    {
-                        (foodQuantity === 0) ?
-                            <input type="submit" value="MAKE YOUR PURCHASE" disabled className="font-heading font-medium uppercase tracking-[2px] bg-main hover:bg-second text-white px-5 py-2 w-full duration-500 disabled:bg-[#b6a1a1]" />
-                            :
-                            <input type="submit" value="MAKE YOUR PURCHASE" className="font-heading font-medium uppercase tracking-[2px] bg-main hover:bg-second text-white px-5 py-2 w-full duration-500" />
-                    }
-                </form>
-            </div>
         </div>
     );
 };
