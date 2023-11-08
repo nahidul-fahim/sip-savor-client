@@ -15,6 +15,8 @@ const Shop = () => {
     const [allProducts, setAllProducts] = useState([]);
     const [loading, setLoading] = useState(true);
     const [inputValue, setInputValue] = useState('');
+    const [currentPage, setCurrentPage] = useState(0);
+
 
 
     // Fetch the data to get all products from database
@@ -28,14 +30,12 @@ const Shop = () => {
     }, [])
 
 
-
     // Handle search input
     const handleSearchInput = e => {
         setInputValue(e.target.value)
     }
 
     const searchInput = inputValue.toLowerCase()
-    // console.log(searchInput);
 
 
     if (loading) {
@@ -47,6 +47,15 @@ const Shop = () => {
         const filteredProducts = allProducts.filter(filtered => filtered.food.trim().toLowerCase().includes(searchInput));
         setAllProducts(filteredProducts);
     }
+
+
+    // total page count and pagination
+    const totalProductNumber = allProducts.length
+    const productPerPage = 9;
+    const totalPages = Math.ceil(totalProductNumber / productPerPage);
+
+    const pageNumber = [...Array(totalPages).keys()]
+
 
 
     return (
@@ -79,6 +88,27 @@ const Shop = () => {
                     allProducts.map(singleProduct => <SingleProduct
                         key={singleProduct._id}
                         singleProduct={singleProduct}></SingleProduct>)
+                }
+            </div>
+
+
+            {/* Pagination */}
+            <div className="flex justify-center items-center mt-10 gap-10">
+                {
+                    pageNumber.map(singlePage => {
+                        const isSelected = currentPage === singlePage;
+                        const buttonStyles = `bg-[lightgray] text-second px-2 py-1 font-semibold font-heading hover:bg-main hover:text-white duration-500 ${isSelected && 'bg-main text-white'}`;
+
+                        return (
+                            <button
+                                onClick={() => setCurrentPage(singlePage)}
+                                key={singlePage}
+                                className={buttonStyles}
+                            >
+                                {singlePage}
+                            </button>
+                        );
+                    })
                 }
             </div>
         </div>
