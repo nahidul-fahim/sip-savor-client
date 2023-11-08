@@ -3,6 +3,7 @@ import axios from "axios";
 import SingleProduct from "./SingleProduct";
 import { FaSistrix } from "react-icons/fa";
 import { Helmet } from "react-helmet";
+import { useLoaderData } from "react-router-dom";
 
 
 const Shop = () => {
@@ -17,17 +18,27 @@ const Shop = () => {
     const [inputValue, setInputValue] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
 
+    const total = useLoaderData();
+
+    const totalProductNumber = total.total;
+
+    console.log(totalProductNumber);
+
+
+
+    const productPerPage = 9;
+
 
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get("http://localhost:5000/allfoods")
+        axios.get(`http://localhost:5000/allfoods?page=${currentPage}&size=${productPerPage}`)
             .then(res => {
                 const data = res.data;
                 setAllProducts(data);
                 setLoading(false);
             })
-    }, [])
+    }, [currentPage, productPerPage])
 
 
     // Handle search input
@@ -50,11 +61,9 @@ const Shop = () => {
 
 
     // total page count and pagination
-    const totalProductNumber = allProducts.length
-    const productPerPage = 9;
     const totalPages = Math.ceil(totalProductNumber / productPerPage);
 
-    const pageNumber = [...Array(totalPages).keys()]
+    const pageNumber = [...Array(totalPages).keys()];
 
 
 
@@ -83,7 +92,7 @@ const Shop = () => {
 
 
             {/* Getting all products section */}
-            <div className="container mx-auto p-5 mt-5 lg:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 justify-around content-around">
+            <div className="container mx-auto p-5 mt-5 lg:mt-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 justify-around content-around">
                 {
                     allProducts.map(singleProduct => <SingleProduct
                         key={singleProduct._id}

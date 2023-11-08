@@ -1,8 +1,12 @@
-# React + Vite
+# Website name: [Sip & Savor Restaurant](https://sip-savor-restaurant.web.app/)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+# Website features:
 
-Currently, two official plugins are available:
-
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Website has a slider in the homepage
+### In the homepage, there is a section, 'today's special' which dynamically features the most ordered food.
+### There is another section in the homepage, that features top 6 ordered foods.
+### The website has login-signup feature
+### A user can order food by logging in
+### There is a private navigation on the navbar, which will only be visible if the user is logged in
+### User can add product, view their ordered products by logging in
+### The website has JWT token verification feature
