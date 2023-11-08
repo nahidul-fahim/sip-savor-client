@@ -3,12 +3,14 @@ import { Link } from "react-router-dom";
 
 const ErrorPage = () => {
 
-    const img404 = 'https://i.ibb.co/vhjh1c4/empty-res.png';
+    const img404 = 'https://i.ibb.co/ZMXS31g/404-anime.gif';
 
     return (
-        <div className="flex flex-col justify-center items-center h-[100vh]"
-        style={{backgroundImage: `linear gradient(to bottom, #00000030, #00000030), url(${img404})`}}>
-            <Link to="/"><button className="px-5 py-2 border-2 text-heading uppercase font-medium text-main border-main hover:bg-main hover:text-white duration-500 tracking-[3px]">Return to Home</button></Link>
+        <div className="flex justify-center items-center h-[100vh] flex-col gap-4">
+            <h2 className="text-6xl font-extrabold font-heading uppercase text-center text-[gray]">Oops!</h2>
+            <img src={img404} alt="" />
+            <h2 className="text-4xl font-extrabold font-heading uppercase text-center text-[gray]">page not found!</h2>
+            <Link to="/"><button className="px-5 py-2 mt-10 text-heading uppercase font-medium text-white bg-main hover:bg-second hover:text-white duration-500 tracking-[3px]">Return to Home</button></Link>
         </div>
     );
 };
