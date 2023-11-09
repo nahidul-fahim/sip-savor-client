@@ -41,15 +41,7 @@ const Login = () => {
                 if (user) {
                     successLogin();
                     logInForm.reset();
-                    const userEmail = { email };
-
-                    // Get access tokem
-                    axios.post("https://sip-savor-server-side.vercel.app/jwt", userEmail, { withCredentials: true })
-                        .then(res => {
-                            if (res.data.success) {
-                                navigate(location?.state ? location?.state : "/")
-                            }
-                        })
+                    navigate(location?.state ? location?.state : "/")
                 }
 
             })

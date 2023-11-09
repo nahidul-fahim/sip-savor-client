@@ -2,6 +2,7 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../../Firebase/Firebase.config'
+import axios from 'axios';
 
 // creating auth for firebase authetication
 const auth = getAuth(app)
@@ -34,7 +35,9 @@ const AuthProvider = ({ children }) => {
             .then(() => {
                 // profile updated
             })
-            .catch(error => console.log(error))
+            .catch(error => {
+                console.log(error)
+            })
     };
 
     // Log in using email-password
@@ -62,19 +65,36 @@ const AuthProvider = ({ children }) => {
         const unSubscribe = onAuthStateChanged(auth, user => {
             setCurrentUser(user);
             setLoading(false);
+
+            const useremail = { email: user?.email };
+            if (user) {
+                axios.post("https://sip-savor-server-side.vercel.app/accesstokencreate", useremail, { withCredentials: true })
+                    .then(() => {
+                        // console.log(res.data);
+                    });
+            } else {
+                axios.post("https://sip-savor-server-side.vercel.app/signoutuser", { user: currentUser?.email }, {
+                    withCredentials: true,
+                })
+                    .then(() => {
+                        // console.log(res.data)
+            });
+    }
+
+
         })
-        return () => unSubscribe();
-    }, [])
+return () => unSubscribe();
+    }, [currentUser?.email])
 
 
-    // Send the info to the children
-    const authInfo = { createNewUser, logInUser, currentUser, loading, logOutUser, googleSignIn, updateUserInfo };
+// Send the info to the children
+const authInfo = { createNewUser, logInUser, currentUser, loading, logOutUser, googleSignIn, updateUserInfo };
 
-    return (
-        <AuthContext.Provider value={authInfo}>
-            {children}
-        </AuthContext.Provider>
-    );
+return (
+    <AuthContext.Provider value={authInfo}>
+        {children}
+    </AuthContext.Provider>
+);
 };
 
 export default AuthProvider;

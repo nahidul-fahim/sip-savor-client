@@ -17,15 +17,20 @@ const Shop = () => {
     const [loading, setLoading] = useState(true);
     const [inputValue, setInputValue] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
+    const [currentViewPort, setCurrentViewPort] = useState(0);
 
+
+    // viewport
+    const calculateViewPort = () => {
+        let currentScroll = window.scrollY;
+        setCurrentViewPort(currentScroll);
+    };
+    console.log(currentViewPort)
+
+
+    // get the total number of products to calculate pagination
     const total = useLoaderData();
-
     const totalProductNumber = total.total;
-
-    console.log(totalProductNumber);
-
-
-
     const productPerPage = 9;
 
 
@@ -68,7 +73,7 @@ const Shop = () => {
 
 
     return (
-        <div>
+        <div onScroll={calculateViewPort}>
             <Helmet>
                 <title>Shop page</title>
                 <meta name="description" content="Nested component" />
