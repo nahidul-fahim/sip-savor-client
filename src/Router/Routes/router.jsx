@@ -35,17 +35,17 @@ const router = createBrowserRouter([
       {
         path: "/shop",
         element: <Shop />,
-        loader: () => fetch('https://sip-savor-server-side.vercel.app/totalfoods')
+        loader: () => fetch('http://localhost:5000/totalfoods')
       },
       {
         path: "/shop/:id",
         element: <SingleProductDetails />,
-        loader: ({ params }) => fetch(`https://sip-savor-server-side.vercel.app/allfoods/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
       },
       {
         path: "/purchase/:id",
         element: <PrivateRoute><PurchasePage /></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://sip-savor-server-side.vercel.app/allfoods/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
       },
       {
         path: "/blog",
@@ -58,7 +58,7 @@ const router = createBrowserRouter([
       {
         path: "/updateproduct/:id",
         element: <PrivateRoute><UpdateProduct /></PrivateRoute>,
-        loader: ({ params }) => fetch(`https://sip-savor-server-side.vercel.app/allfoods/${params.id}`)
+        loader: ({ params }) => fetch(`http://localhost:5000/allfoods/${params.id}`)
       },
       {
         path: "/addnewproduct",

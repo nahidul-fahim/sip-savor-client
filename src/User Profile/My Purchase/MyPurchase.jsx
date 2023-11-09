@@ -21,7 +21,7 @@ const MyPurchase = () => {
 
     // fetching data by email
     useEffect(() => {
-        axios.get(`https://sip-savor-server-side.vercel.app/purchased/${userEmail}`, {withCredentials: true})
+        axios.get(`http://localhost:5000/purchased/${userEmail}`, {withCredentials: true})
             .then(res => {
                 const data = res.data;
                 setPurchasedProducts(data);
@@ -35,7 +35,7 @@ const MyPurchase = () => {
     const handleDelete = id => {
         const productId = id;
 
-        fetch(`https://sip-savor-server-side.vercel.app/purchased/${productId}`, {
+        fetch(`http://localhost:5000/purchased/${productId}`, {
             method: 'DELETE',
         })
             .then(res => res.json())

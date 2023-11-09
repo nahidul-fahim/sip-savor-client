@@ -63,38 +63,41 @@ const AuthProvider = ({ children }) => {
     // Currently signed in user
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, user => {
+
+            const email = user?.email || currentUser?.email;
+            const useremail = { email: email };
             setCurrentUser(user);
             setLoading(false);
-
-            const useremail = { email: user?.email };
+            // get the use email
+            // sending user email to backend
             if (user) {
-                axios.post("https://sip-savor-server-side.vercel.app/accesstokencreate", useremail, { withCredentials: true })
-                    .then(() => {
-                        // console.log(res.data);
+                axios.post("http://localhost:5000/tokencreate", useremail, { withCredentials: true })
+                    .then(res => {
+                        console.log(res.data);
                     });
             } else {
-                axios.post("https://sip-savor-server-side.vercel.app/signoutuser", { user: currentUser?.email }, {
-                    withCredentials: true,
+                axios.post("http://localhost:5000/signoutuser", useremail, {
+                    withCredentials: true
                 })
-                    .then(() => {
-                        // console.log(res.data)
-            });
-    }
+                    .then(res => {
+                        console.log(res.data)
+                    });
+            }
 
 
         })
-return () => unSubscribe();
+        return () => unSubscribe();
     }, [currentUser?.email])
 
 
-// Send the info to the children
-const authInfo = { createNewUser, logInUser, currentUser, loading, logOutUser, googleSignIn, updateUserInfo };
+    // Send the info to the children
+    const authInfo = { createNewUser, logInUser, currentUser, loading, logOutUser, googleSignIn, updateUserInfo };
 
-return (
-    <AuthContext.Provider value={authInfo}>
-        {children}
-    </AuthContext.Provider>
-);
+    return (
+        <AuthContext.Provider value={authInfo}>
+            {children}
+        </AuthContext.Provider>
+    );
 };
 
 export default AuthProvider;

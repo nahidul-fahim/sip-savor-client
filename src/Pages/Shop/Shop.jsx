@@ -13,33 +13,29 @@ const Shop = () => {
     const pageBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
     // Declaring states for different functions
-    const [allProducts, setAllProducts] = useState([]);
+    const [initialProducts, setInitialProducts] = useState([]);
+    const [allProducts, setAllProducts] = useState(initialProducts);
     const [loading, setLoading] = useState(true);
     const [inputValue, setInputValue] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
-    const [currentViewPort, setCurrentViewPort] = useState(0);
-
-
-    // viewport
-    const calculateViewPort = () => {
-        let currentScroll = window.scrollY;
-        setCurrentViewPort(currentScroll);
-    };
-    console.log(currentViewPort)
+    const [totalProductNumber, setTotalProductNumber] = useState(0)
 
 
     // get the total number of products to calculate pagination
     const total = useLoaderData();
-    const totalProductNumber = total.total;
+    useEffect(() => {
+        const totalProduct = total.total;
+        setTotalProductNumber(totalProduct);
+    }, [total.total])
     const productPerPage = 9;
-
 
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get(`https://sip-savor-server-side.vercel.app/foodsoncollection?page=${currentPage}&size=${productPerPage}`)
+        axios.get(`http://localhost:5000/foodsoncollection?page=${currentPage}&size=${productPerPage}`)
             .then(res => {
                 const data = res.data;
+                setInitialProducts(data);
                 setAllProducts(data);
                 setLoading(false);
             })
@@ -48,7 +44,12 @@ const Shop = () => {
 
     // Handle search input
     const handleSearchInput = e => {
-        setInputValue(e.target.value)
+        setInputValue(e.target.value);
+        // setting total product and to default(all) if search input is empty 
+        if (e.target.value === '') {
+            setTotalProductNumber(total.total);
+            setAllProducts(initialProducts)
+        }
     }
 
     const searchInput = inputValue.toLowerCase()
@@ -62,18 +63,19 @@ const Shop = () => {
     const handleSearch = () => {
         const filteredProducts = allProducts.filter(filtered => filtered.food.trim().toLowerCase().includes(searchInput));
         setAllProducts(filteredProducts);
+        //setting pagination as per the amount of searched product
+        setTotalProductNumber(filteredProducts.length);
     }
 
 
     // total page count and pagination
     const totalPages = Math.ceil(totalProductNumber / productPerPage);
-
     const pageNumber = [...Array(totalPages).keys()];
 
 
 
     return (
-        <div onScroll={calculateViewPort}>
+        <div>
             <Helmet>
                 <title>Shop page</title>
                 <meta name="description" content="Nested component" />
@@ -119,7 +121,7 @@ const Shop = () => {
                                 key={singlePage}
                                 className={buttonStyles}
                             >
-                                {singlePage}
+                                {singlePage + 1}
                             </button>
                         );
                     })

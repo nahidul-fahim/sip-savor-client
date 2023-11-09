@@ -23,7 +23,7 @@ const MyAddition = () => {
 
     // fetching data by email
     useEffect(() => {
-        axios.get(`https://sip-savor-server-side.vercel.app/userFoods/${userEmail}`, { withCredentials: true })
+        axios.get(`http://localhost:5000/userFoods/${userEmail}`, { withCredentials: true })
             .then(res => {
                 const data = res.data;
                 setUserProducts(data);

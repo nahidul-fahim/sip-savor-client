@@ -34,7 +34,7 @@ const AddNewProduct = () => {
 
 
         // sending updated data to database
-        fetch(`https://sip-savor-server-side.vercel.app/addnewproduct`, {
+        fetch(`http://localhost:5000/addnewproduct`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

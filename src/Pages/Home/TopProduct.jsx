@@ -15,7 +15,7 @@ const TopProduct = () => {
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get("https://sip-savor-server-side.vercel.app/allfoods")
+        axios.get("http://localhost:5000/allfoods")
             .then(res => {
                 const data = res.data;
                 const sortedProducts = data.sort((a, b) => {
