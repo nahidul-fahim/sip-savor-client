@@ -5,7 +5,7 @@ import { Navigate } from "react-router-dom";
 
 
 const axiosFetch = axios.create({
-    baseURL: 'http://localhost:5000',
+    baseURL: 'https://sip-savor-server-side.vercel.app',
     withCredentials: true,
 })
 
