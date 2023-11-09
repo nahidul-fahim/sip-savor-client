@@ -1,15 +1,16 @@
 import { useEffect, useState } from "react";
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
-import axios from "axios";
 import SingleAdditions from "./SingleAdditions";
 import { Helmet } from "react-helmet";
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const MyAddition = () => {
 
-    // Declaring states for different functions
+    // hooks
     const [userProducts, setUserProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosFetch = useAxiosFetch();
 
     // banner section background
     const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
@@ -20,17 +21,15 @@ const MyAddition = () => {
     const userEmail = currentUser.email;
 
 
-
     // fetching data by email
     useEffect(() => {
-        axios.get(`http://localhost:5000/userFoods/${userEmail}`, { withCredentials: true })
+        axiosFetch.get(`/userFoods/${userEmail}`)
             .then(res => {
                 const data = res.data;
                 setUserProducts(data);
                 setLoading(false);
             })
-
-    }, [userEmail])
+    }, [userEmail, axiosFetch])
 
 
 

@@ -1,24 +1,27 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { Parallax } from 'react-parallax';
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const TodaySpecial = () => {
+
+
+    // Hooks
+    const [loading, setLoading] = useState(true);
+    const [sortedProduct, setSortedProduct] = useState([]);
+    const axiosFetch = useAxiosFetch();
+
+
 
     // Necessary images
     const loadingGif = 'https://i.ibb.co/HrZVdVr/loading-animation.gif';
     const parrlaxBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
 
-
-    // Declaring states for different functions
-    const [loading, setLoading] = useState(true);
-    const [sortedProduct, setSortedProduct] = useState([]);
-
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get("http://localhost:5000/allfoods")
+        axiosFetch.get('/allfoods')
             .then(res => {
                 const data = res.data;
                 const sortedProducts = data.sort((a, b) => {
@@ -29,7 +32,9 @@ const TodaySpecial = () => {
                 setSortedProduct(sortedProducts.slice(0, 1));
                 setLoading(false);
             })
-    }, []);
+    }, [axiosFetch])
+
+
 
 
     // loading for data fetching from database
@@ -44,7 +49,7 @@ const TodaySpecial = () => {
         <div>
 
             <Parallax className="py-[80px]"
-            blur={3} bgImage={parrlaxBg} bgImageSizes="cover" bgImageAlt="the cat" strength={500}>
+                blur={3} bgImage={parrlaxBg} bgImageSizes="cover" bgImageAlt="the cat" strength={500}>
                 {/* conternt main container */}
                 <div className="container mx-auto p-5 flex flex-col lg:flex-row justify-between items-center gap-[80px] lg:gap-5">
 

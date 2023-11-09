@@ -2,19 +2,22 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import { Helmet } from "react-helmet";
+import useAxiosFetch from '../../Hooks/useAxiosFetch/useAxiosFetch';
 
 
 const AddNewProduct = () => {
 
-    // banner section background
-    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
-
-
-    // Get current user
+    // Hooks
     const { currentUser } = useAuthenticate();
     const addedPerson = currentUser.displayName;
     const addedBy = currentUser.email;
-    console.log(currentUser, addedBy, addedPerson);
+    const axiosFetch = useAxiosFetch();
+
+
+
+
+    // banner section background
+    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
 
     // Send info to database to add new product
@@ -33,17 +36,10 @@ const AddNewProduct = () => {
         const newProductInfo = { food, price, foodQuantity, foodImage, cookerName, foodOriginCountry, foodDescription, foodCategory, addedBy, addedPerson };
 
 
-        // sending updated data to database
-        fetch(`http://localhost:5000/addnewproduct`, {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newProductInfo),
-        })
-            .then(res => res.json())
+        // sending product update data to database
+        axiosFetch.post('/addnewproduct', newProductInfo)
             .then(data => {
-                if (data.insertedId) {
+                if (data.data.insertedId) {
                     successfulAdd()
                 }
                 else {

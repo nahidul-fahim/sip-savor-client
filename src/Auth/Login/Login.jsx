@@ -6,16 +6,18 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet";
-import axios from "axios";
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 const Login = () => {
 
-    // Getting info from useAuthenticate custom hook
+    // Hooks
     const { logInUser, googleSignIn } = useAuthenticate();
-
     const location = useLocation();
     const navigate = useNavigate();
+    const axiosFetch = useAxiosFetch()
 
+
+    // images
     const restaurantBg = 'https://i.ibb.co/bRz6SG2/restaurant-bg.png';
     const [showPassword, setShowPassword] = useState(false);
 
@@ -61,16 +63,16 @@ const Login = () => {
                 const user = userInfo.user;
                 if (user) {
                     successLogin();
-                    const email = user.email;
-                    const userEmail = { email };
+                    // const email = user.email;
+                    // const userEmail = { email };
 
-                    // Get access tokem
-                    axios.post("http://localhost:5000/jwt", userEmail, { withCredentials: true })
-                        .then(res => {
-                            if (res.data.success) {
-                                navigate(location?.state ? location?.state : "/")
-                            }
-                        })
+                    // Send user to backend (maybe I don't need this anymore. Need to recheck. Because I did the same work on 'AuthProvider' -> onAuthStateChanged [not sure though] )
+                    // axiosFetch.post('/jwt', userEmail)
+                    //     .then(res => {
+                    //         if (res.data.success) {
+                    //             navigate(location?.state ? location?.state : "/")
+                    //         }
+                    //     })
 
                 }
             })

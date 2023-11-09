@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 import { createContext, useEffect, useState } from "react";
 import { GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import app from '../../Firebase/Firebase.config'
-import axios from 'axios';
+import useAxiosFetch from '../../Hooks/useAxiosFetch/useAxiosFetch';
 
 // creating auth for firebase authetication
 const auth = getAuth(app)
@@ -16,8 +16,10 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
 
+    // Hooks
     const [currentUser, setCurrentUser] = useState('');
     const [loading, setLoading] = useState(true);
+    const axiosFetch = useAxiosFetch();
 
 
     // Create new user by email-password
@@ -58,36 +60,33 @@ const AuthProvider = ({ children }) => {
     };
 
 
-
-
     // Currently signed in user
     useEffect(() => {
         const unSubscribe = onAuthStateChanged(auth, user => {
 
+            // get the use email
             const email = user?.email || currentUser?.email;
             const useremail = { email: email };
             setCurrentUser(user);
             setLoading(false);
-            // get the use email
+
             // sending user email to backend
             if (user) {
-                axios.post("http://localhost:5000/tokencreate", useremail, { withCredentials: true })
+                axiosFetch.post('/tokencreate', useremail)
                     .then(res => {
                         console.log(res.data);
                     });
-            } else {
-                axios.post("http://localhost:5000/signoutuser", useremail, {
-                    withCredentials: true
-                })
+            }
+            else {
+                axiosFetch.post('/signoutuser', useremail)
                     .then(res => {
                         console.log(res.data)
                     });
             }
 
-
         })
         return () => unSubscribe();
-    }, [currentUser?.email])
+    }, [currentUser?.email, axiosFetch])
 
 
     // Send the info to the children

@@ -4,6 +4,7 @@ import SingleProduct from "./SingleProduct";
 import { FaSistrix } from "react-icons/fa";
 import { Helmet } from "react-helmet";
 import { useLoaderData } from "react-router-dom";
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const Shop = () => {
@@ -12,13 +13,14 @@ const Shop = () => {
     const loadingGif = 'https://i.ibb.co/HrZVdVr/loading-animation.gif';
     const pageBg = 'https://i.ibb.co/FJFWZDC/dining.png';
 
-    // Declaring states for different functions
+    // Hooks and custom hooks
     const [initialProducts, setInitialProducts] = useState([]);
     const [allProducts, setAllProducts] = useState(initialProducts);
     const [loading, setLoading] = useState(true);
     const [inputValue, setInputValue] = useState('');
     const [currentPage, setCurrentPage] = useState(0);
     const [totalProductNumber, setTotalProductNumber] = useState(0)
+    const axiosFetch = useAxiosFetch();
 
 
     // get the total number of products to calculate pagination
@@ -32,14 +34,14 @@ const Shop = () => {
 
     // Fetch the data to get all products from database
     useEffect(() => {
-        axios.get(`http://localhost:5000/foodsoncollection?page=${currentPage}&size=${productPerPage}`)
+        axiosFetch.get(`/foodsoncollection?page=${currentPage}&size=${productPerPage}`)
             .then(res => {
                 const data = res.data;
                 setInitialProducts(data);
                 setAllProducts(data);
                 setLoading(false);
             })
-    }, [currentPage, productPerPage])
+    }, [axiosFetch, currentPage, productPerPage])
 
 
     // Handle search input

@@ -1,18 +1,21 @@
 import { useLoaderData } from "react-router-dom";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const UpdateProduct = () => {
 
-    // banner section background
-    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
+    //Hooks
+    const axiosFetch = useAxiosFetch();
 
     // Get data
     const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage } = useLoaderData();
 
-    console.log(price);
+
+    // banner section background
+    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
 
     // send updated data to database
@@ -30,19 +33,11 @@ const UpdateProduct = () => {
 
         const updatedProductInfo = { food, price, foodQuantity, foodImage, cookerName, foodOriginCountry, foodDescription, foodCategory };
 
-        // console.log(price);
 
         // sending updated data to database
-        fetch(`http://localhost:5000/updateFood/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatedProductInfo),
-        })
-            .then(res => res.json())
+        axiosFetch.put(`updateFood/${_id}`, updatedProductInfo)
             .then(data => {
-                if (data.modifiedCount > 0) {
+                if (data.data.modifiedCount > 0) {
                     successfulUpdate()
                 }
                 else {

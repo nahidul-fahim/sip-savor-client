@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 import useAuthenticate from "../../Hooks/useAuthenticate/useAuthenticate";
 import axios from "axios";
 import SinglePurchase from "./SinglePurchase"; import { Helmet } from "react-helmet";
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const MyPurchase = () => {
 
-    // Declaring states for different functions
+    // Hooks
     const [purchasedProducts, setPurchasedProducts] = useState([]);
     const [loading, setLoading] = useState(true);
+    const axiosFetch = useAxiosFetch();
 
     // banner section background
     const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
@@ -21,26 +23,22 @@ const MyPurchase = () => {
 
     // fetching data by email
     useEffect(() => {
-        axios.get(`http://localhost:5000/purchased/${userEmail}`, {withCredentials: true})
+        axiosFetch.get(`/purchased/${userEmail}`)
             .then(res => {
                 const data = res.data;
                 setPurchasedProducts(data);
                 setLoading(false);
             })
-
-    }, [userEmail])
+    }, [axiosFetch, userEmail])
 
 
     // Delte a product from cart
     const handleDelete = id => {
         const productId = id;
 
-        fetch(`http://localhost:5000/purchased/${productId}`, {
-            method: 'DELETE',
-        })
-            .then(res => res.json())
+        axiosFetch.delete(`purchased/${productId}`)
             .then(data => {
-                if (data.deletedCount > 0) {
+                if (data.data.deletedCount > 0) {
                     remainingProducts(id);
                 }
             })

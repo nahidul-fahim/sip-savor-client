@@ -5,25 +5,31 @@ import "react-datepicker/dist/react-datepicker.css";
 import { useState } from "react";
 import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
+import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 
 const PurchasePage = () => {
 
-    // banner section background
-    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
+    //Hooks
+    const axiosFetch = useAxiosFetch();
+
+
+    // Date picker
+    const [startDate, setStartDate] = useState(new Date());
+
 
     // Get data
     const { _id, food, price, foodQuantity, foodCategory, foodDescription, foodOriginCountry, cookerName, foodImage, orderCount, addedBy } = useLoaderData();
 
+    // banner section background
+    const pageBg = 'https://i.ibb.co/Q6HgH0b/purchase.png';
 
     // Get currently logged in user
     const { currentUser } = useAuthenticate();
     const buyer = currentUser?.displayName;
     const buyerEmail = currentUser?.email;
 
-    // Date picker
-    const [startDate, setStartDate] = useState(new Date());
 
     // Handle purchase function
     const handlePurchase = e => {
@@ -42,16 +48,11 @@ const PurchasePage = () => {
         // Data to send to database in order to update existing product info
         const updatedProductInfo = { totalOrder, reaminingQuantity };
 
+
         // sending purchased data to database
-        fetch('http://localhost:5000/purchasedProducts', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(purchaseInfo),
-        })
-            .then(res => res.json())
-            .then(data => {
+        axiosFetch.post('/purchasedProducts', purchaseInfo)
+            .then(res => {
+                const data = res.data;
                 if (data.insertedId) {
                     successfullPurchase()
                 }
@@ -65,19 +66,14 @@ const PurchasePage = () => {
 
 
         // sending updated data to calculate quantity and total order
-        fetch(`http://localhost:5000/allfoods/${_id}`, {
-            method: 'PUT',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(updatedProductInfo),
-        })
-            .then(res => res.json())
-            .then(() => {
-                // console.log(data)
+        axiosFetch.put(`/allfoods/${_id}`, updatedProductInfo)
+            .then(res => {
+                if (res.data) {
+                    console.log("quantity updated")
+                }
             })
-            .catch(() => {
-                // console.log(error)
+            .catch(error => {
+                console.log(error)
             })
     }
 
