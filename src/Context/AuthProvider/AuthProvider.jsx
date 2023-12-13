@@ -73,8 +73,8 @@ const AuthProvider = ({ children }) => {
             // sending user email to backend
             if (user) {
                 axiosFetch.post('/tokencreate', useremail)
-                    .then(res => {
-                        console.log(res.data);
+                    .then(() => {
+                        //
                     });
             }
             else {

@@ -6,7 +6,6 @@ import { ToastContainer, toast, Zoom } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { FcGoogle } from "react-icons/fc";
 import { Helmet } from "react-helmet";
-import useAxiosFetch from "../../Hooks/useAxiosFetch/useAxiosFetch";
 
 const Login = () => {
 
@@ -14,7 +13,6 @@ const Login = () => {
     const { logInUser, googleSignIn } = useAuthenticate();
     const location = useLocation();
     const navigate = useNavigate();
-    const axiosFetch = useAxiosFetch()
 
 
     // images
@@ -63,17 +61,6 @@ const Login = () => {
                 const user = userInfo.user;
                 if (user) {
                     successLogin();
-                    // const email = user.email;
-                    // const userEmail = { email };
-
-                    // Send user to backend (maybe I don't need this anymore. Need to recheck. Because I did the same work on 'AuthProvider' -> onAuthStateChanged [not sure though] )
-                    // axiosFetch.post('/jwt', userEmail)
-                    //     .then(res => {
-                    //         if (res.data.success) {
-                    //             navigate(location?.state ? location?.state : "/")
-                    //         }
-                    //     })
-
                 }
             })
             .catch(error => {

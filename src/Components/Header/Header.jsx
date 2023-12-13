@@ -38,6 +38,19 @@ const Header = () => {
                 };
             }}
         >Shop</NavLink>
+
+        <NavLink to="/storyhub"
+            className="font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px]"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "#9F4B4B" : "",
+                    fontWeight: isActive ? "bold" : "",
+                    transform: isActive ? "translate(10px,0px)" : "",
+                    transition: isActive ? "transform 1.1s" : ""
+                };
+            }}
+        >Story Hub</NavLink>
+
         <NavLink to="/blog"
             className="font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px]"
             style={({ isActive }) => {
@@ -77,6 +90,19 @@ const Header = () => {
                 };
             }}
         >Shop</NavLink>
+
+        <NavLink to="/storyhub"
+            className="font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px]"
+            style={({ isActive }) => {
+                return {
+                    color: isActive ? "#9F4B4B" : "",
+                    fontWeight: isActive ? "bold" : "",
+                    transform: isActive ? "translate(10px,0px)" : "",
+                    transition: isActive ? "transform 1.1s" : ""
+                };
+            }}
+        >Story Hub</NavLink>
+
         <NavLink to="/blog"
             className="font-body text-bodyText text-[14px] hover:text-main duration-300 uppercase font-semibold tracking-[1px]"
             style={({ isActive }) => {

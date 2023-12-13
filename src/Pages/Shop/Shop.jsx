@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
 import SingleProduct from "./SingleProduct";
 import { FaSistrix } from "react-icons/fa";
 import { Helmet } from "react-helmet";

@@ -13,6 +13,7 @@ import UpdateProduct from '../../User Profile/My Addition/UpdateProduct';
 import AddNewProduct from '../../User Profile/AddNewProduct/AddNewProduct';
 import MyPurchase from '../../User Profile/My Purchase/MyPurchase';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+// import StoryHub from '../../Pages/StoryHub/StoryHub';
 
 const router = createBrowserRouter([
   {
@@ -67,7 +68,11 @@ const router = createBrowserRouter([
       {
         path: "/mypurchase",
         element: <PrivateRoute><MyPurchase /></PrivateRoute>
-      }
+      },
+      // {
+      //   path: "/storyhub",
+      //   element: <PrivateRoute><StoryHub /></PrivateRoute>
+      // }
     ]
   },
 ]);
